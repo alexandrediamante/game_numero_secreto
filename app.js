@@ -6,7 +6,7 @@ let tentativas = 1;
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
-    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', { rate: 1.2 });
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2});
 }
 
 function exibirMensagemInicial() {
@@ -24,14 +24,19 @@ function criarInput() {
     const input = document.createElement('input');
 
     if (isMobileDevice()) {
-        input.setAttribute('type', 'text'); // Usar 'text' para mostrar o teclado numérico no iOS
-        input.setAttribute('inputmode', 'numeric'); // Indicar que o campo deve aceitar entrada numérica
+        input.setAttribute('type', 'tel'); // Usar 'tel' para mostrar o teclado numérico
         input.setAttribute('pattern', '\\d*'); // Permitir apenas dígitos
+        input.addEventListener('input', validarEntradaNumerica); // Adicionar evento de validação
     } else {
         input.setAttribute('type', 'number');
     }
 
     inputContainer.appendChild(input);
+}
+
+function validarEntradaNumerica(event) {
+    const input = event.target;
+    input.value = input.value.replace(/\D/g, ''); // Remover caracteres não numéricos
 }
 
 criarInput();
@@ -73,7 +78,7 @@ function gerarNumeroAleatorio() {
 }
 
 function limparCampo() {
-    chute = document.querySelector('input');
+    let chute = document.querySelector('input');
     chute.value = '';
 }
 
