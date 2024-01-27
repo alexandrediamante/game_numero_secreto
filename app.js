@@ -6,7 +6,7 @@ let tentativas = 1;
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
-    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2});
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', { rate: 1.2 });
 }
 
 function exibirMensagemInicial() {
@@ -14,11 +14,28 @@ function exibirMensagemInicial() {
     exibirTextoNaTela('p', 'Escolha um número entre 1 e 100');
 }
 
-exibirMensagemInicial();
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function criarInput() {
+    const inputContainer = document.getElementById('input-container');
+    const input = document.createElement('input');
+
+    if (isMobileDevice()) {
+        input.setAttribute('type', 'tel'); // Usar 'tel' para mostrar o teclado numérico
+    } else {
+        input.setAttribute('type', 'number');
+    }
+
+    inputContainer.appendChild(input);
+}
+
+criarInput();
 
 function verificarChute() {
     let chute = document.querySelector('input').value;
-    
+
     if (chute == numeroSecreto) {
         exibirTextoNaTela('h1', 'Acertou!');
         let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
@@ -64,10 +81,3 @@ function reiniciarJogo() {
     exibirMensagemInicial();
     document.getElementById('reiniciar').setAttribute('disabled', true)
 }
-
-
-
-
-
-
-
