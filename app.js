@@ -24,7 +24,8 @@ function criarInput() {
     const input = document.createElement('input');
 
     if (isMobileDevice()) {
-        input.setAttribute('type', 'tel'); // Usar 'tel' para mostrar o teclado numérico
+        input.setAttribute('type', 'text'); // Usar 'text' para mostrar o teclado numérico no iOS
+        input.setAttribute('inputmode', 'numeric'); // Indicar que o campo deve aceitar entrada numérica
         input.setAttribute('pattern', '\\d*'); // Permitir apenas dígitos
     } else {
         input.setAttribute('type', 'number');
