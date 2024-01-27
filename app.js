@@ -25,6 +25,7 @@ function criarInput() {
 
     if (isMobileDevice()) {
         input.setAttribute('type', 'tel'); // Usar 'tel' para mostrar o teclado numérico
+        input.setAttribute('pattern', '\\d*'); // Permitir apenas dígitos
     } else {
         input.setAttribute('type', 'number');
     }
